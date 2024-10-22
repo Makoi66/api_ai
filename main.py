@@ -1,7 +1,6 @@
 import asyncio
 import config
 import gemini
-import aimlapi
 
 
 from os import remove
