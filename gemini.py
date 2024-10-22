@@ -7,21 +7,31 @@ genai.configure(api_key=config.models_tokens['gemini'])
 
 global chat
 
+global history
+history = {}
 
-def create(ver) -> None:
+with open('whitelist.txt', 'r') as f:
+    for e in f:
+        history[e.strip()] = []
+
+print("gemememe")
+print(history)
+
+def create(ver, person) -> None:
     global chat
     model = genai.GenerativeModel(ver)
-    chat = model.start_chat(history=[])
+    chat = model.start_chat(history=history[person])
 
 
-def request(mess, photo):
+def request(mess, photo, person):
     global chat
     if photo:
         img = PIL.Image.open('img.png')
         response = chat.send_message(content=[mess, img], safety_settings=config.gemini_settings)
     else:
         response = chat.send_message(content=mess, safety_settings=config.gemini_settings)
-    # print(chat.history)
+    history[person] = chat.history
+    print(chat.history)
     return response.text
 
 

@@ -1,14 +1,11 @@
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
-whitelist = [
-    474066447
-]
 
 tele_token = '7032308631:AAHT2LCpKNJ4ckInsmHoFTOzULY5HB5FnzE'
 
 
 models_tokens = {
-    'gemini': 'AIzaSyA8jzw_5Uv1G2ECbOYaxfQvct7j1TFmi_s',
+    'gemini': 'AIzaSyCc_9tNmMDtL_4IDJ0H6hDWSJ7F4e26KLk',
     'chatgpt': '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',
     'claude': ''
 }
