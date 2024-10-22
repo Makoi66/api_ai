@@ -15,7 +15,7 @@ models = [
     'gemini-1.5-pro-002',
     #'gpt-4o',
     #'claude-3-opus-20240229',
-    'gemini-pro-vision'
+    'gemini-1.5-flash-002'
 ]
 
 gemini_settings = {

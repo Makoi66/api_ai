@@ -14,17 +14,12 @@ with open('whitelist.txt', 'r') as f:
     for e in f:
         history[e.strip()] = []
 
-print("gemememe")
-print(history)
+def clear(person):
+    history[person] = []
 
-def create(ver, person) -> None:
-    global chat
+def request(ver, mess, photo, person):
     model = genai.GenerativeModel(ver)
     chat = model.start_chat(history=history[person])
-
-
-def request(mess, photo, person):
-    global chat
     if photo:
         img = PIL.Image.open('img.png')
         response = chat.send_message(content=[mess, img], safety_settings=config.gemini_settings)

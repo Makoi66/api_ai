@@ -29,7 +29,6 @@ model = 0
 
 
 
-
 # --- Main Menu ---
 
 menu = InlineKeyboardBuilder()
@@ -51,17 +50,9 @@ async def command_start_handler(message: Message) -> None:
 async def command_start_handler(message: Message) -> None:
     if f'{message.chat.id}' in whitelist:
         global model
-        if model == 0:
-            gemini.create(config.models[0])
-        if model == 1:
-            #chatgpt
-            pass
-        if model == 2:
-            #claude
-            pass
-        if model == 3:
-            gemini.create(config.models[3])
-        await message.answer(f'{config.models[model]}: context deleted')
+        if model == config.models[0] or model == config.models[1]:
+            gemini.clear(f'{message.chat.id}')
+        await message.answer(f'{model}: context deleted')
 
 
 @dp.message(F.text, Command('add'))
@@ -120,17 +111,9 @@ async def command_start_handler(message: Message) -> None:
                 await bot.download(message.photo[-1], 'img.png')
                 tgmess = message.caption
             ans = ''
-            if model == 0 or model == 1:
+            if model == config.models[0] or model == config.models[1]:
                 #gemini
-                ans = gemini.request(tgmess, img)
-            elif model == 1:
-                #gpt-4o
-                pass
-                #ans = aimlapi.generate_text(config.models[1], tgmess)
-            elif model == 2:
-                #claude
-                pass
-                #ans = aimlapi.generate_text(config.models[3], tgmess)
+                ans = gemini.request(model, tgmess, img, f'{message.chat.id}')
             if img:
                 remove('img.png')
             await message.answer(ans, parse_mode=ParseMode.MARKDOWN)
@@ -145,19 +128,11 @@ async def vvcallback(callback: types.CallbackQuery) -> None:
         global model
         global choose
         if callback.data == config.models[0]:
-            gemini.create(callback.data, f'{callback.message.chat.id}')
-            model = 0
+            model = config.models[0]
+            gemini.clear(f'{callback.message.chat.id}')
         elif callback.data == config.models[1]:
-            #chatgpt
-            model = 1
-            pass
-        elif callback.data == config.models[2]:
-            #claude
-            model = 2
-            pass
-        elif callback.data == config.models[3]:
-            gemini.create(callback.data, f'{callback.message.chat.id}')
-            model = 3
+            model = config.models[1]
+            gemini.clear(f'{callback.message.chat.id}')
         else:
             raise Exception
         await choose.edit_text(f'Selected model: {callback.data}')
