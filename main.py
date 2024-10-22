@@ -11,11 +11,13 @@ from aiogram.types import Message, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.enums import ParseMode
 
-with open('admin.txt', 'r') as f:
+path = '//bin//api_ai//'
+
+with open(f'{path}admin.txt', 'r') as f:
     admin = f.readlines()
 
 global whitelist
-with open('whitelist.txt', 'r') as f:
+with open(f'{path}whitelist.txt', 'r') as f:
     whitelist = []
     for e in f:
         whitelist.append(e.strip())
@@ -59,7 +61,7 @@ async def command_start_handler(message: Message) -> None:
 async def command_start_handler(message: Message) -> None:
     if f'{message.chat.id}' in admin:
         try:
-            with open('whitelist.txt', 'a+') as f:
+            with open(f'{path}whitelist.txt', 'a+') as f:
                 f.write(f'\n{message.text.split()[-1]}')
             whitelist.append(message.text.split()[-1])
             await message.answer('OK', parse_mode=ParseMode.MARKDOWN)
@@ -72,7 +74,7 @@ async def command_start_handler(message: Message) -> None:
     if f'{message.chat.id}' in admin:
         try:
             whitelist.remove(message.text.split()[-1])
-            with open('whitelist.txt', 'w') as f:
+            with open(f'{path}whitelist.txt', 'w') as f:
                 for i in range(len(whitelist)):
                     if i == len(whitelist)-1:
                         f.write(f'{whitelist[i]}')

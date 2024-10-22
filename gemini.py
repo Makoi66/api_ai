@@ -10,7 +10,7 @@ global chat
 global history
 history = {}
 
-with open('whitelist.txt', 'r') as f:
+with open('//bin//api_ai//whitelist.txt', 'r') as f:
     for e in f:
         history[e.strip()] = []
 
