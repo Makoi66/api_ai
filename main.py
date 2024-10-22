@@ -42,7 +42,6 @@ for e in config.models:
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    print(message.chat.id)
     if f'{message.chat.id}' in whitelist:
         global choose
         choose = await message.answer("Choose the model", reply_markup=menu.as_markup(resize_keyboard=True))
@@ -120,8 +119,7 @@ async def command_start_handler(message: Message) -> None:
                 remove('img.png')
             await message.answer(ans, parse_mode=ParseMode.MARKDOWN)
         except Exception as e:
-            print(e)
-            await message.answer('!Error: retry', parse_mode=ParseMode.MARKDOWN)
+            await message.answer(f'{e}', parse_mode=ParseMode.MARKDOWN)
 
 
 @dp.callback_query()

@@ -26,7 +26,6 @@ def request(ver, mess, photo, person):
     else:
         response = chat.send_message(content=mess, safety_settings=config.gemini_settings)
     history[person] = chat.history
-    print(chat.history)
     return response.text
 
 
