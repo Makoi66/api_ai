@@ -1,21 +1,22 @@
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
-tele_token = '7032308631:AAHT2LCpKNJ4ckInsmHoFTOzULY5HB5FnzE'
+tele_token = ''
 
 
 models_tokens = {
-    'gemini': 'AIzaSyCc_9tNmMDtL_4IDJ0H6hDWSJ7F4e26KLk',
-    'chatgpt': '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',
+    'gemini': '',
+    'chatgpt': '',
     'claude': ''
 }
 
 
 models = [
-    'gemini-1.5-pro-002',
+    'gemini-2.0-flash-exp',
     #'gpt-4o',
     #'claude-3-opus-20240229',
-    'gemini-1.5-flash-002'
+    'gemini-2.0-flash-thinking-exp'
+    'gemini-1.5-pro-latest'
 ]
 
 gemini_settings = {
